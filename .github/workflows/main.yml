@@ -31,4 +31,5 @@ jobs:
         if: github.event_name == 'release'
         run: |
           echo "release was triggered!!!!"
+          echo ${{ env.DEPLOY_URL }}
 
