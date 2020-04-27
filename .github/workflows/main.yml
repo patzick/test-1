@@ -14,7 +14,8 @@ jobs:
         with:
           node-version: "12.x"
       - name: Setup variables
-        run: echo ::set-env name=DEPLOY_URL::$(if [${{github.event_name}} == "release" ]; then echo "https://shopware-pwa.storefrontcloud.io" else echo "https://shopware-pwa-canary.storefrontcloud.io" fi )
+        run: |
+          echo ::set-env name=DEPLOY_URL::$([[ ${{github.event_name}} == "release" ]] && echo "https://shopware-pwa.storefrontcloud.io" || echo "https://shopware-pwa-canary.storefrontcloud.io"))
       - name: debug
         run: |
           echo ${{github.event_name}}
