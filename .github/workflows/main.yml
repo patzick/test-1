@@ -5,6 +5,9 @@ on:
       - master
   release:
     types: [published]
+env:
+  CANARY_URL: https://shopware-pwa-canary.storefrontcloud.io
+  RELEASE_URL: https://shopware-pwa.storefrontcloud.io
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -15,7 +18,7 @@ jobs:
           node-version: "12.x"
       - name: Setup variables
         run: |
-          echo ::set-env name=DEPLOY_URL::$([[ "${{github.event_name}}" == "release" ]] && echo "https://shopware-pwa.storefrontcloud.io" || echo "https://shopware-pwa-canary.storefrontcloud.io")
+          echo ::set-env name=DEPLOY_URL::$([[ "${{github.event_name}}" == "release" ]] && echo "$RELEASE_URL" || echo "$CANARY_URL")
       - name: debug
         run: |
           echo ${{github.event_name}}
@@ -28,12 +31,4 @@ jobs:
         if: github.event_name == 'release'
         run: |
           echo "release was triggered!!!!"
-      - uses: chrnorm/deployment-action@releases/v1
-        name: Create GitHub deployment
-        id: deployment
-        with:
-          token: "${{ github.token }}"
-          target_url: https://shopware-pwa.storefrontcloud.io
-          environment: production
-          initial_status: in_progress
 
