@@ -13,6 +13,8 @@ jobs:
         uses: actions/setup-node@v1
         with:
           node-version: "12.x"
+      - name: Setup variables
+        run: echo ::set-env name=DEPLOY_URL::$(if [${{github.event_name}} == "release" ]; then echo "https://shopware-pwa.storefrontcloud.io" else echo "https://shopware-pwa-canary.storefrontcloud.io" fi )
       - name: debug
         run: |
           echo ${{github.event_name}}
@@ -20,8 +22,17 @@ jobs:
         if: github.event_name == 'push'
         run: |
           echo "push was triggered!!!!"
+          echo ${{ env.DEPLOY_URL }}
       - name: conditional sth on release
         if: github.event_name == 'release'
         run: |
           echo "release was triggered!!!!"
+      - uses: chrnorm/deployment-action@releases/v1
+        name: Create GitHub deployment
+        id: deployment
+        with:
+          token: "${{ github.token }}"
+          target_url: https://shopware-pwa.storefrontcloud.io
+          environment: production
+          initial_status: in_progress
 
