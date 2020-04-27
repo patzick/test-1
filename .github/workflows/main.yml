@@ -16,3 +16,12 @@ jobs:
       - name: debug
         run: |
           echo ${{github.event_name}}
+      - name: conditional sth on push
+        if: github.event_name == "push"
+        run: |
+          echo "push was triggered!!!!"
+      - name: conditional sth on release
+        if: github.event_name == "release"
+        run: |
+          echo "release was triggered!!!!"
+
