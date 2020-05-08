@@ -19,6 +19,10 @@ jobs:
       - name: Setup variables
         run: |
           echo ::set-env name=DEPLOY_URL::$([[ "${{github.event_name}}" == "release" ]] && echo "$RELEASE_URL" || echo "$CANARY_URL")
+      - name: Should invoke release
+        if: contains(github.event.head_commit.message, 'chore: release stable')
+        run: |
+          echo "Start releasing packages"
       - name: debug
         run: |
           echo ${{github.event_name}}
