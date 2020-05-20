@@ -36,4 +36,8 @@ jobs:
         run: |
           echo "release was triggered!!!!"
           echo ${{ env.DEPLOY_URL }}
+      - name: conditional commen
+        if: github.repository_owner	== 'mkucmus'
+        run: |
+            echo "my repo hej!"
 
