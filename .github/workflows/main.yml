@@ -43,7 +43,6 @@ jobs:
           repo-token: ${{ secrets.GITHUB_TOKEN }}
           allow-repeats: false
           message: |
-            This PR comes from forked repository and cannot be deployed on our preview instance!
-            Nevertheless, thank you, we are going to see it in action locally first 👍
+            This PR comes from forked repository and cannot be deployed on our preview instance! Nevertheless, thank you, we are going to see it in action locally first 👍
 
 
