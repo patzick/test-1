@@ -37,7 +37,7 @@ jobs:
           echo "release was triggered!!!!"
           echo ${{ env.DEPLOY_URL }}
       - name: conditional commen
-        if: github.repository_owner	== 'mkucmus'
+        if: github.repository_owner == 'mkucmus'
         uses: mshick/add-pr-comment@v1
         with:
           message: |
@@ -45,5 +45,4 @@ jobs:
             Nevertheless, thank you, we are going to see it in action locally first 👍
           repo-token: ${{ secrets.GITHUB_TOKEN }}
           allow-repeats: false
-            
 
