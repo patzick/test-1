@@ -40,9 +40,10 @@ jobs:
         if: github.repository_owner == 'mkucmus'
         uses: mshick/add-pr-comment@v1
         with:
+          repo-token: ${{ secrets.GITHUB_TOKEN }}
+          allow-repeats: false
           message: |
             This PR comes from forked repository and cannot be deployed on our preview instance!
             Nevertheless, thank you, we are going to see it in action locally first 👍
-          repo-token: ${{ secrets.GITHUB_TOKEN }}
-          allow-repeats: false
+
 
