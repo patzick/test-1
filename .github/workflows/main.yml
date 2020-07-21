@@ -25,6 +25,7 @@ jobs:
           echo "Start releasing packages"
       - name: debug
         run: |
+          console.log(${{github}});
           echo ${{github.event_name}}
       - name: conditional sth on push
         if: github.event_name == 'push'
